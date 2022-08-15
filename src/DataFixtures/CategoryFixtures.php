@@ -2,8 +2,9 @@
 
 namespace App\DataFixtures;
 
-use Doctrine\Bundle\FixturesBundle\Fixture;
+use App\Entity\Category;
 use Doctrine\Persistence\ObjectManager;
+use Doctrine\Bundle\FixturesBundle\Fixture;
 
 class CategoryFixtures extends Fixture
 {
@@ -15,8 +16,8 @@ class CategoryFixtures extends Fixture
             //$keyct = array_rand($ct,1)
             $category = new Category();
             //$brand->setCt($ct[$keyct]);
-            $brand->setName("Category $i");
-            //fdfdfddffd
+            $category->setName("Category $i");
+            
         }
 
         $manager->flush();
