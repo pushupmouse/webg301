@@ -20,6 +20,7 @@ class BrandFixtures extends Fixture
             $brand->setName("Brand $i")
                   ->setDateFounded(DateTime::createFromFormat('Y/m/d', '2022/05/25'))
                   ->setImage("https://inkythuatso.com/uploads/thumbnails/800/2021/11/logo-asus-inkythuatso-2-01-26-09-21-11.jpg");
+            $manager->persist($brand);      
         }
 
         $manager->flush();

@@ -17,7 +17,7 @@ class CategoryFixtures extends Fixture
             $category = new Category();
             //$brand->setCt($ct[$keyct]);
             $category->setName("Category $i");
-            
+            $manager->persist($category);
         }
 
         $manager->flush();
