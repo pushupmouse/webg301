@@ -31,9 +31,6 @@ class Laptop
     #[ORM\Column(type: 'string', length: 255)]
     private $image;
 
-    #[ORM\ManyToOne(targetEntity: Brand::class, inversedBy: 'laptops')]
-    private $brand;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -110,16 +107,5 @@ class Laptop
 
         return $this;
     }
-
-    public function getBrand(): ?Brand
-    {
-        return $this->brand;
-    }
-
-    public function setBrand(?Brand $brand): self
-    {
-        $this->brand = $brand;
-
-        return $this;
-    }
 }
+//comment
