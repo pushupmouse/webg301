@@ -54,9 +54,46 @@ class CategoryController extends AbstractController
   
     #[Route('/add', name: 'category_add')]
     public function categoryAdd (Request $request) {
+        $category = new Category;
+        $form = $this->createForm(CategoryType::class, $category);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager = $this->getDoctrine()->getManager();
+            $manager->persist($category);
+            $manager->flush();
+            $this->addFlash('Success', 'Category added successfully!');
+            return $this->redirectToRoute('category_index');
+        }
+        return $this->renderForm(
+            'category/add.html.twig',
+            [
+                'categoryForm' => $form
+            ]
+        );
     }
   
     #[Route('/edit/{id}', name: 'category_edit')]
     public function categoryEdit ($id, Request $request) {
+        $category = $this->getDoctrine()->getRepository(Category::class)->find($id);
+        if ($category == null) {
+            $this->addFlash('Warning', 'Category id does not exist!');
+            return $this->redirectToRoute('category_index');
+        } else {
+            $form = $this->createForm(CategoryType::class, $category);
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $manager = $this->getDoctrine()->getManager();
+                $manager->persist($category);
+                $manager->flush();
+                $this->addFlash('Success', 'Category edited successfully!');
+                return $this->redirectToRoute('category_index');
+            }
+            return $this->renderForm(
+                'category/edit.html.twig',
+                [
+                    'categoryForm' => $form
+                ]
+            );
+        }
     }
 }

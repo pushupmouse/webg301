@@ -54,9 +54,46 @@ class ManufacturerController extends AbstractController
   
     #[Route('/add', name: 'manufacturer_add')]
     public function manufacturerAdd (Request $request) {
+        $manufacturer = new Manufacturer;
+        $form = $this->createForm(ManufacturerType::class, $manufacturer);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager = $this->getDoctrine()->getManager();
+            $manager->persist($manufacturer);
+            $manager->flush();
+            $this->addFlash('Success', 'Manufacturer added successfully!');
+            return $this->redirectToRoute('manufacturer_index');
+        }
+        return $this->renderForm(
+            'manufacturer/add.html.twig',
+            [
+                'manufacturerForm' => $form
+            ]
+        );
     }
   
     #[Route('/edit/{id}', name: 'manufacturer_edit')]
     public function manufacturerEdit ($id, Request $request) {
+        $manufacturer = $this->getDoctrine()->getRepository(Manufacturer::class)->find($id);
+        if ($manufacturer == null) {
+            $this->addFlash('Warning', 'Manufacturer id does not exist!');
+            return $this->redirectToRoute('manufacturer_index');
+        } else {
+            $form = $this->createForm(ManufacturerType::class, $manufacturer);
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $manager = $this->getDoctrine()->getManager();
+                $manager->persist($manufacturer);
+                $manager->flush();
+                $this->addFlash('Success', 'Manufacturer edited successfully!');
+                return $this->redirectToRoute('manufacturer_index');
+            }
+            return $this->renderForm(
+                'manufacturer/edit.html.twig',
+                [
+                    'manufacturerForm' => $form
+                ]
+            );
+        }
     }
 }

@@ -54,9 +54,46 @@ class OriginController extends AbstractController
   
     #[Route('/add', name: 'origin_add')]
     public function originAdd (Request $request) {
+        $origin = new Origin;
+        $form = $this->createForm(OriginType::class, $origin);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager = $this->getDoctrine()->getManager();
+            $manager->persist($origin);
+            $manager->flush();
+            $this->addFlash('Success', 'Origin added successfully!');
+            return $this->redirectToRoute('origin_index');
+        }
+        return $this->renderForm(
+            'origin/add.html.twig',
+            [
+                'originForm' => $form
+            ]
+        );
     }
   
     #[Route('/edit/{id}', name: 'origin_edit')]
     public function originEdit ($id, Request $request) {
+        $origin = $this->getDoctrine()->getRepository(Origin::class)->find($id);
+        if ($origin == null) {
+            $this->addFlash('Warning', 'Origin id does not exist!');
+            return $this->redirectToRoute('origin_index');
+        } else {
+            $form = $this->createForm(OriginType::class, $origin);
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $manager = $this->getDoctrine()->getManager();
+                $manager->persist($origin);
+                $manager->flush();
+                $this->addFlash('Success', 'Origin edited successfully!');
+                return $this->redirectToRoute('origin_index');
+            }
+            return $this->renderForm(
+                'origin/edit.html.twig',
+                [
+                    'originForm' => $form
+                ]
+            );
+        }
     }
 }

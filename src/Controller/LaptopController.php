@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Laptop;
+use App\Form\LaptopType;
 use App\Repository\LaptopRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
@@ -71,10 +72,47 @@ class LaptopController extends AbstractController
     #[Route('/add', name: 'laptop_add')]
     public function laptopAdd(Request $request)
     {
+        $laptop = new Laptop;
+        $form = $this->createForm(LaptopType::class, $laptop);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager = $this->getDoctrine()->getManager();
+            $manager->persist($laptop);
+            $manager->flush();
+            $this->addFlash('Success', 'Laptop added successfully!');
+            return $this->redirectToRoute('laptop_index');
+        }
+        return $this->renderForm(
+            'laptop/add.html.twig',
+            [
+                'laptopForm' => $form
+            ]
+        );
     }
 
     #[Route('/edit/{id}', name: 'laptop_edit')]
     public function laptopEdit($id, Request $request)
     {
+        $laptop = $this->getDoctrine()->getRepository(Laptop::class)->find($id);
+        if ($laptop == null) {
+            $this->addFlash('Warning', 'Laptop id does not exist!');
+            return $this->redirectToRoute('laptop_index');
+        } else {
+            $form = $this->createForm(LaptopType::class, $laptop);
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $manager = $this->getDoctrine()->getManager();
+                $manager->persist($laptop);
+                $manager->flush();
+                $this->addFlash('Success', 'Laptop edited successfully!');
+                return $this->redirectToRoute('laptop_index');
+            }
+            return $this->renderForm(
+                'laptop/edit.html.twig',
+                [
+                    'laptopForm' => $form
+                ]
+            );
+        }
     }
 }
