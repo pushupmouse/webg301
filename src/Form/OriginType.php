@@ -12,8 +12,20 @@ class OriginType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name')
-            ->add('image')
+            ->add('name', TextType::class, [
+                'label' => 'Designed in',
+                'attr' => [
+                    'minlength' => 3,
+                    'maxlength' => 30
+                ]
+            ])
+            ->add('image' ,TextType::class,
+            [
+                'label' => 'Image of Origin',
+                'attr' => [
+                    'maxlength' => 255
+                ]
+            ])
         ;
     }
 

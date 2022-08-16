@@ -10,7 +10,7 @@ class CategoryFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        //$ct = ["Laptop", "Ultraportable", "Ultrabook", "Chromebook", "MacBook", "Convertible", "Tablet", "Netbook"];
+        //$ct = ["Notebook", "Ultraportable", "Ultrabook", "Chromebook", "MacBook", "Convertible", "Tablet", "Netbook"];
         
         for ($i=1; $i<=20; $i++) {
             //$keyct = array_rand($ct,1)
