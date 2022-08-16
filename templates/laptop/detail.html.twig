@@ -32,6 +32,18 @@
                <td>Out of stock</td>
             {% endif %}           
             </tr>
+             <tr class="h5">
+               <th>Category</th>
+               <td>
+               {% if laptop.category != null %}
+                  <a class="text-decoration-none" href="{{ path('category_detail', {'id' : laptop.category.id })}}">
+                     {{ laptop.category.name }}
+                  </a>    
+               {% else %}
+                     <i>Not Available</i>
+               {% endif %}
+             </td>
+            </tr>
          </table>
       </div>
    </div>
