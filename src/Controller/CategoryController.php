@@ -38,16 +38,18 @@ class CategoryController extends AbstractController
     }
   
     #[Route('/delete/{id}', name: 'category_delete')]
-    public function categoryDelete ($id, ManagerRegistry $managerRegistry) {
-        $category = $this->getDoctrine()->getRepository(Category::class)->find($id);
+    public function categoryDelete($id, ManagerRegistry $managerRegistry)
+    {
+        $category = $managerRegistry->getRepository(Category::class)->find($id);
         if ($category == null) {
-            $this->addFlash('Warning', 'Invalid category id !');
-            return $this->redirectToRoute('category_index');
+            $this->addFlash('Warning', 'Delete denied! Category id not found!');
+        } else {
+            $manager = $managerRegistry->getManager();
+            $manager->remove($category);
+            $manager->flush();
+            $this->addFlash('Success', 'Category deleted successfully!');
         }
-        return $this->render('category/detail.html.twig',
-        [
-            'category' => $category
-        ]);
+        return $this->redirectToRoute('category_index');
     }
   
     #[Route('/add', name: 'category_add')]

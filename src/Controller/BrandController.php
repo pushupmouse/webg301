@@ -14,38 +14,57 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/brand')]
 class BrandController extends AbstractController
-{ 
+{
     #[Route('/index', name: 'brand_index')]
-    public function brandIndex () {
-      $brands = $this->getDoctrine()->getRepository(Brand::class)->findAll();
-      return $this->render('brand/index.html.twig',
-          [
-              'brands' => $brands
-          ]);
+    public function brandIndex()
+    {
+        $brands = $this->getDoctrine()->getRepository(Brand::class)->findAll();
+        return $this->render(
+            'brand/index.html.twig',
+            [
+                'brands' => $brands
+            ]
+        );
     }
-  
+
     #[Route('/detail/{id}', name: 'brand_detail')]
-    public function brandDetail ($id, BrandRepository $brandRepository) {
+    public function brandDetail($id, BrandRepository $brandRepository)
+    {
         $brand = $this->getDoctrine()->getRepository(Brand::class)->find($id);
         if ($brand == null) {
             $this->addFlash('Warning', 'Invalid brand id !');
             return $this->redirectToRoute('brand_index');
         }
-        return $this->render('brand/detail.html.twig',
-        [
-            'brand' => $brand
-        ]);
+        return $this->render(
+            'brand/detail.html.twig',
+            [
+                'brand' => $brand
+            ]
+        );
     }
-  
+
     #[Route('/delete/{id}', name: 'brand_delete')]
-    public function brandDelete ($id, ManagerRegistry $managerRegistry) {
+    public function brandDelete($id, ManagerRegistry $managerRegistry)
+    {
+        $brand = $managerRegistry->getRepository(Brand::class)->find($id);
+        if ($brand == null) {
+            $this->addFlash('Warning', 'Delete denied! Brand id not found!');
+        } else {
+            $manager = $managerRegistry->getManager();
+            $manager->remove($brand);
+            $manager->flush();
+            $this->addFlash('Success', 'Brand deleted successfully!');
+        }
+        return $this->redirectToRoute('brand_index');
     }
-  
+
     #[Route('/add', name: 'brand_add')]
-    public function brandAdd (Request $request) {
+    public function brandAdd(Request $request)
+    {
     }
-  
+
     #[Route('/edit/{id}', name: 'brand_edit')]
-    public function brandEdit ($id, Request $request) {
+    public function brandEdit($id, Request $request)
+    {
     }
 }

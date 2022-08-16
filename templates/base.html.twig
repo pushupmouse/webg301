@@ -61,6 +61,19 @@
             </div>
             
         {% endblock %}
+        {% block flash %}
+			<div class="container col-md-6 text-center mt-3">
+				{% for flash in app.session.flashBag.get('Success') %}
+					<p class="alert alert-success">{{ flash }}</p>
+				{% endfor %}
+                {% for flash in app.session.flashBag.get('Warning') %}
+					<p class="alert alert-warning">{{ flash }}</p>
+				{% endfor %}
+				{% for flash in app.session.flashBag.get('Danger') %}
+					<p class="alert alert-danger">{{ flash }}</p>
+				{% endfor %}
+			</div>
+		{% endblock %}
         {% block body %}{% endblock %}
         {% block footer %}
             <div class="container mt-3 text-center">

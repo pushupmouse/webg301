@@ -38,7 +38,18 @@ class ManufacturerController extends AbstractController
     }
   
     #[Route('/delete/{id}', name: 'manufacturer_delete')]
-    public function manufacturerDelete ($id, ManagerRegistry $managerRegistry) {
+    public function manufacturerDelete($id, ManagerRegistry $managerRegistry)
+    {
+        $manufacturer = $managerRegistry->getRepository(Manufacturer::class)->find($id);
+        if ($manufacturer == null) {
+            $this->addFlash('Warning', 'Delete denied! Manufacturer id not found!');
+        } else {
+            $manager = $managerRegistry->getManager();
+            $manager->remove($manufacturer);
+            $manager->flush();
+            $this->addFlash('Success', 'Manufacturer deleted successfully!');
+        }
+        return $this->redirectToRoute('manufacturer_index');
     }
   
     #[Route('/add', name: 'manufacturer_add')]

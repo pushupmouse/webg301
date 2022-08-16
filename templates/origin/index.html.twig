@@ -8,9 +8,9 @@
             <h1 class="text text-primary">List of Origins</h1>
         </th>
         <th>
-            {# <a class="text-decoration-none" href="{{ path('origin_add') }}">
+            <a class="text-decoration-none" href="{{ path('origin_add') }}">
                 <img src="{{ asset('images/buttons/add.png') }}" width="40" height="40">
-            </a> #}
+            </a>
         </th>
     </tr>
     <tr>
@@ -36,7 +36,7 @@
                     <img src="{{ asset('images/buttons/edit.png') }}" width="40" height="40">
                 </a>
                 <a class="text-decoration-none" href="{{ path('origin_delete', {'id' : origin.id }) }}"
-                onclick="return confirm('Are you sure to delete this origin ?');"
+                onclick="return confirm('You are about to delete this origin. Proceed with deletion?');"
                 >
                     <img src="{{ asset('images/buttons/delete.png') }}" width="40" height="40">
                 </a>

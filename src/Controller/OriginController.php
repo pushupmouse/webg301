@@ -38,7 +38,18 @@ class OriginController extends AbstractController
     }
   
     #[Route('/delete/{id}', name: 'origin_delete')]
-    public function originDelete ($id, ManagerRegistry $managerRegistry) {
+    public function originDelete($id, ManagerRegistry $managerRegistry)
+    {
+        $origin = $managerRegistry->getRepository(Origin::class)->find($id);
+        if ($origin == null) {
+            $this->addFlash('Warning', 'Delete denied! Origin id not found!');
+        } else {
+            $manager = $managerRegistry->getManager();
+            $manager->remove($origin);
+            $manager->flush();
+            $this->addFlash('Success', 'Origin deleted successfully!');
+        }
+        return $this->redirectToRoute('origin_index');
     }
   
     #[Route('/add', name: 'origin_add')]
