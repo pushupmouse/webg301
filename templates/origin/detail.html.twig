@@ -5,32 +5,15 @@
    <div class="row">
       <div class="col-4">
          <div class="card">
-            <img src="{{ laptop.image }}" width="300" height="200">
+            <img src="{{ origin.image }}" width="300" height="200">
          </div>
       </div>
       <div class="col-6">
          <table class="table table-bordered">
             <tr>
                <th colspan="2" class="bg-light">
-                  <h2 class="text-primary">{{ laptop.name }} </h2>
+                  <h2 class="text-primary">{{ origin.name }} </h2>
                </th>
-            </tr>
-            <tr class="h5">
-               <th>Published Date</th>
-               <td>{{ laptop.date | date('d/m/Y')}}</td>
-            </tr>
-            <tr class="h5">
-               <th>Laptop Price</th>
-               <td>${{ laptop.price }} </td>
-            </tr>
-            <tr class="h5">
-            {% if laptop.quantity >= 1 %}
-               <th>Laptop Quantity</th>
-               <td>{{ laptop.quantity }}</td>
-            {% else %}
-               <th>Laptop Quantity</th>
-               <td>Out of stock</td>
-            {% endif %}           
             </tr>
          </table>
       </div>
