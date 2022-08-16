@@ -47,33 +47,24 @@ class LaptopRepository extends ServiceEntityRepository
         }
     }
 
-    // public function sortLaptopByIdAsc()
-    // {
-    //     return $this->createQueryBuilder('laptop')
-    //         ->orderBy('laptop.id', 'ASC')
-    //         ->getQuery()
-    //         ->getResult()
-    //     ;
-    // }
-    
-    // public function sortLaptopByIdDesc()
-    // {
-    //     return $this->createQueryBuilder('laptop')
-    //         ->orderBy('laptop.id', 'DESC')
-    //         ->getQuery()
-    //         ->getResult()
-    //     ;
-    // }
+    public function sortLaptopByPriceAsc()
+    {
+        return $this->createQueryBuilder('laptop')
+            ->orderBy('laptop.price', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 
 
-    // public function sortLaptopByPriceDesc()
-    // {
-    //     return $this->createQueryBuilder('l')
-    //         ->orderBy('laptop.price', 'DESC')
-    //         ->getQuery()
-    //         ->getResult()
-    //     ;
-    // }
+    public function sortLaptopByPriceDesc()
+    {
+        return $this->createQueryBuilder('laptop')
+            ->orderBy('laptop.price', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 
     public function searchLaptop($keyword)
     {

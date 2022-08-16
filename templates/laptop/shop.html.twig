@@ -12,11 +12,11 @@
 						<h5 class="text text-primary">Sort laptop</h5>
 					</div>
 					<div class="col">
-						{# <select class="form-control" onchange="window.location.href=this.value">
+						<select class="form-control" onchange="window.location.href=this.value">
 							<option value="">Sort by Options</option>
-							<option value="">Ascending Price</option>
+							<option value="{{ path('sort_asc_price') }}">Ascending Price</option>
 							<option value="{{ path('sort_desc_price') }}">Descending Price</option>
-						</select> #}
+						</select>
 					</div>
 				</div>
 			</div>

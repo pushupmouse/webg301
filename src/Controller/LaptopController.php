@@ -116,14 +116,23 @@ class LaptopController extends AbstractController
         }
     }
 
-    // #[Route('/price/desc', name: 'sort_desc_price')]
-    // public function sortLaptopPriceDesc(LaptopRepository $laptopRepository){
-    //     $laptops = $laptopRepository->sortLaptopByPriceDesc();
-    //     return $this->render('laptop/shop.html.twig',
-    //     [
-    //         'laptops'=>$laptops
-    //     ]);
-    // }
+    #[Route('/price/asc', name: 'sort_asc_price')]
+    public function sortLaptopPriceAsc(LaptopRepository $laptopRepository){
+        $laptops = $laptopRepository->sortLaptopByPriceAsc();
+        return $this->render('laptop/shop.html.twig',
+        [
+            'laptops'=>$laptops
+        ]);
+    }
+    
+    #[Route('/price/desc', name: 'sort_desc_price')]
+    public function sortLaptopPriceDesc(LaptopRepository $laptopRepository){
+        $laptops = $laptopRepository->sortLaptopByPriceDesc();
+        return $this->render('laptop/shop.html.twig',
+        [
+            'laptops'=>$laptops
+        ]);
+    }
 
     #[Route('/search', name: 'search_laptop')]
     public function searchLaptop(LaptopRepository $laptopRepository, Request $request)
