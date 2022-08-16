@@ -1,19 +1,83 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<div class="container mt-3 text-center">
-    <h1 class="alert alert-danger"> Laptop Shop </h1> 
-    <div class="card-group">
-        <div class="row">
-            {% for laptop in laptops %}
-                <div class="col-md-3 mt-4">
-                <div class="card">
-                        <img src="{{ laptop.image }}" width="200" height="150">
-                        <h3 class="text text-primary">{{ laptop.name }}</h3>
-                </div>
-                </div>
-            {% endfor %}
-        </div>
-    </div>
-</div>
-{% endblock %}
+	<div class="container mt-3 text-center">
+		<h1 class="alert alert-danger">
+			Laptop Shop
+		</h1>
+		<div class="row">
+			<div class="col-md-5">
+				<div class="row">
+					<div class="col">
+						<h5 class="text text-primary">Sort laptop</h5>
+					</div>
+					<div class="col">
+						{# <select class="form-control" onchange="window.location.href=this.value">
+							<option value="">Sort by Options</option>
+							<option value="">Ascending Price</option>
+							<option value="{{ path('sort_desc_price') }}">Descending Price</option>
+						</select> #}
+					</div>
+				</div>
+			</div>
+			<div class="col-md-7">
+				<div class="row">
+					<div class="col">
+						<h5 class="text text-primary">Search laptop</h5>
+					</div>
+					<div class="col">
+						<div class="form-group">
+							<form action="{{ path('search_laptop') }}" method="post">
+								<input class="form-control" type="search" name="keyword" required placeholder="Enter laptop name" minlength="1" maxlength="20">
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="card-group">
+			<div class="row">
+				{% for laptop in laptops %}
+					{% if laptop | length < 4 %}
+						<div class="col mt-4">
+						{% else %}
+							<div class="col-md-3 mt-4">
+							{% endif %}
+							<div class="card">
+								<img src="{{ laptop.image }}" width="200" height="150">
+								<h3 class="text text-primary">{{ laptop.name }}</h3>
+								{% if laptop.quantity >=1 %}
+									<h5 class="text text-primary">
+										Price:
+										{{ laptop.price }}
+										$
+									</h5>
+									<h5 class="text text-danger">
+										In-stock:
+										{{ laptop.quantity }}
+									</h5>
+								</div>
+								<div class="card card-footer mt-1">
+									<form action="" method="post">
+										<input type="hidden" name="laptopid" value="{{ laptop.id }}">
+										<input type="number" name="quantity" min="1" max="{{ laptop.quantity }}">
+										<br>
+										<input class="btn btn-success mt-3" type="submit" value="Add to cart">
+									</form>
+								{% else %}
+									<h5 class="text text-primary">
+										Price:
+										{{ laptop.price }}
+										$
+									</h5>
+									<h5 class="text text-danger">
+										Out of stock
+									</h5>
+								{% endif %}
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	{% endblock %}
