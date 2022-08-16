@@ -43,7 +43,7 @@
 						{% else %}
 							<div class="col-md-3 mt-4">
 							{% endif %}
-							<div class="card">
+							<div class="card card-footer">
 								<img src="{{ laptop.image }}" width="200" height="150">
 								<h3 class="text text-primary">{{ laptop.name }}</h3>
 								{% if laptop.quantity >=1 %}
@@ -56,14 +56,14 @@
 										In-stock:
 										{{ laptop.quantity }}
 									</h5>
-								</div>
-								<div class="card card-footer mt-1">
+								<div class="mt-1">
 									<form action="{{ path('add_to_cart') }}" method="post">
 										<input type="hidden" name="laptop_id" value="{{ laptop.id }}">
 										<input type="number" name="quantity" min="1" max="{{ laptop.quantity }}">
 										<br>
 										<input class="btn btn-success mt-3" type="submit" value="Add to Cart">
 									</form>
+									</div>
 								{% else %}
 									<h5 class="text text-primary">
 										Price:
@@ -73,7 +73,9 @@
 									<h5 class="text text-danger">
 										Out of stock
 									</h5>
+								
 								{% endif %}
+								
 							</div>
 						</div>
 					{% endfor %}
