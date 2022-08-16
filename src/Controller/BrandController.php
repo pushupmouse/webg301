@@ -23,18 +23,18 @@ class BrandController extends AbstractController
               'brands' => $brands
           ]);
     }
-
-    #[Route('/list', name: 'brand_list')]
-    public function brandList () {
-      $brands = $this->getDoctrine()->getRepository(Brand::class)->findAll();
-      return $this->render('brand/list.html.twig',
-          [
-              'brands' => $brands
-          ]);
-    }
   
     #[Route('/detail/{id}', name: 'brand_detail')]
     public function brandDetail ($id, BrandRepository $brandRepository) {
+        $brand = $this->getDoctrine()->getRepository(Brand::class)->find($id);
+        if ($brand == null) {
+            $this->addFlash('Warning', 'Invalid brand id !');
+            return $this->redirectToRoute('brand_index');
+        }
+        return $this->render('brand/detail.html.twig',
+        [
+            'brand' => $brand
+        ]);
     }
   
     #[Route('/delete/{id}', name: 'brand_delete')]

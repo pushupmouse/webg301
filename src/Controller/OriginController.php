@@ -3,20 +3,49 @@
 namespace App\Controller;
 
 use App\Entity\Origin;
+use App\Form\OriginType;
+use App\Repository\OriginRepository;
+use Doctrine\Persistence\ManagerRegistry;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/origin')]
 class OriginController extends AbstractController
-{
+{ 
     #[Route('/index', name: 'origin_index')]
-    public function originIndex()
-    {
-        $origins = $this->getDoctrine()->getRepository(Origin::class)->findAll();
-        return $this->render('origin/index.html.twig',
+    public function originIndex () {
+      $origins = $this->getDoctrine()->getRepository(Origin::class)->findAll();
+      return $this->render('origin/index.html.twig',
+          [
+              'origins' => $origins
+          ]);
+    }
+  
+    #[Route('/detail/{id}', name: 'origin_detail')]
+    public function originDetail ($id, OriginRepository $originRepository) {
+        $origin = $this->getDoctrine()->getRepository(Origin::class)->find($id);
+        if ($origin == null) {
+            $this->addFlash('Warning', 'Invalid origin id !');
+            return $this->redirectToRoute('origin_index');
+        }
+        return $this->render('origin/detail.html.twig',
         [
-            'origins' => $origins
+            'origin' => $origin
         ]);
+    }
+  
+    #[Route('/delete/{id}', name: 'origin_delete')]
+    public function originDelete ($id, ManagerRegistry $managerRegistry) {
+    }
+  
+    #[Route('/add', name: 'origin_add')]
+    public function originAdd (Request $request) {
+    }
+  
+    #[Route('/edit/{id}', name: 'origin_edit')]
+    public function originEdit ($id, Request $request) {
     }
 }

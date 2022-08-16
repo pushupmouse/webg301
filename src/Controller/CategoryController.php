@@ -23,22 +23,31 @@ class CategoryController extends AbstractController
               'categories' => $categories
           ]);
     }
-
-    #[Route('/list', name: 'category_list')]
-    public function categoryList () {
-      $categories = $this->getDoctrine()->getRepository(Category::class)->findAll();
-      return $this->render('category/list.html.twig',
-          [
-              'categories' => $categories
-          ]);
-    }
   
     #[Route('/detail/{id}', name: 'category_detail')]
     public function categoryDetail ($id, CategoryRepository $categoryRepository) {
+        $category = $this->getDoctrine()->getRepository(Category::class)->find($id);
+        if ($category == null) {
+            $this->addFlash('Warning', 'Invalid category id !');
+            return $this->redirectToRoute('category_index');
+        }
+        return $this->render('category/detail.html.twig',
+        [
+            'category' => $category
+        ]);
     }
   
     #[Route('/delete/{id}', name: 'category_delete')]
     public function categoryDelete ($id, ManagerRegistry $managerRegistry) {
+        $category = $this->getDoctrine()->getRepository(Category::class)->find($id);
+        if ($category == null) {
+            $this->addFlash('Warning', 'Invalid category id !');
+            return $this->redirectToRoute('category_index');
+        }
+        return $this->render('category/detail.html.twig',
+        [
+            'category' => $category
+        ]);
     }
   
     #[Route('/add', name: 'category_add')]

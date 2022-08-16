@@ -1,0 +1,26 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+<div class="container col-md-8 text-center mt-3">
+   <div class="row">
+      <div class="col-4">
+         <div class="card">
+            <img src="{{ brand.image }}" width="300" height="200">
+         </div>
+      </div>
+      <div class="col-6">
+         <table class="table table-bordered">
+            <tr>
+               <th colspan="2" class="bg-light">
+                  <h2 class="text-primary">{{ brand.name }} </h2>
+               </th>
+            </tr>
+            <tr class="h5">
+               <th>Date Founded</th>
+               <td>{{ brand.dateFounded | date('d/m/Y')}}</td>
+            </tr>
+         </table>
+      </div>
+   </div>
+</div>
+{% endblock %}

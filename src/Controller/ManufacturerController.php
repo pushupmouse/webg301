@@ -23,18 +23,18 @@ class ManufacturerController extends AbstractController
               'manufacturers' => $manufacturers
           ]);
     }
-
-    #[Route('/list', name: 'manufacturer_list')]
-    public function manufacturerList () {
-      $manufacturers = $this->getDoctrine()->getRepository(Manufacturer::class)->findAll();
-      return $this->render('manufacturer/list.html.twig',
-          [
-              'manufacturers' => $manufacturers
-          ]);
-    }
   
     #[Route('/detail/{id}', name: 'manufacturer_detail')]
     public function manufacturerDetail ($id, ManufacturerRepository $manufacturerRepository) {
+        $manufacturer = $this->getDoctrine()->getRepository(Manufacturer::class)->find($id);
+        if ($manufacturer == null) {
+            $this->addFlash('Warning', 'Invalid manufacturer id !');
+            return $this->redirectToRoute('manufacturer_index');
+        }
+        return $this->render('manufacturer/detail.html.twig',
+        [
+            'manufacturer' => $manufacturer
+        ]);
     }
   
     #[Route('/delete/{id}', name: 'manufacturer_delete')]
