@@ -2,17 +2,20 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Origin;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class OriginController extends AbstractController
 {
-    #[Route('/origin', name: 'app_origin')]
-    public function index(): Response
+    #[Route('/index', name: 'origin_index')]
+    public function originIndex()
     {
-        return $this->render('origin/index.html.twig', [
-            'controller_name' => 'OriginController',
+        $origins = $this->getDoctrine()->getRepository(Origin::class)->findAll();
+        return $this->render('origin/index.html.twig',
+        [
+            'origins' => $origins
         ]);
     }
 }
