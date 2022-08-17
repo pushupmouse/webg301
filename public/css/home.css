@@ -1,5 +1,5 @@
 .row-1{
-    display: flex;
+    display: inline-block;
     align-items: center;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -17,7 +17,7 @@
     border-radius: 20%;
 }
 .col-2 h1{
-    font-size: 50px;
+    font-size: 40px;
     line-height: 60px;
     margin: 25px 0;
 }
@@ -33,9 +33,3 @@
     background: linear-gradient(to right, rgb(255, 160, 216) 0%, rgb(149, 255, 181) 100%);
     color: #000;
 }
-/* .container-1{
-    max-width: 2000px;
-    margin: 0 0;
-    padding-left: 25px;
-    padding-right: 25px;
-} */
