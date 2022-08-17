@@ -71,3 +71,8 @@ h1{
     color: rgb(255, 0, 0);
     font-family: 'Poppins', sans-serif;
 }
+.register{
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    text-decoration: none;
+}

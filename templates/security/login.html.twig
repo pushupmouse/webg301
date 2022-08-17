@@ -46,6 +46,7 @@
 
 				<button type="submit" name="Submit" class="login-btn">LOGIN</button>
 
+                <a class="register" href="{{ path('app_register') }}">Register</a>
 				{% if error %}
 					<p class="error">{{ error.messageKey|trans(error.messageData, 'security') }}</p>
 				{% endif %}
