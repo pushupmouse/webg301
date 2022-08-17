@@ -2,14 +2,14 @@
 
 {% block body %}
 	<div class="container mt-3 text-center">
-		<h1 class="alert alert-primary">
+		<h1 class="alert alert-dark">
 			Laptop Shop
 		</h1>
 		<div class="row">
 			<div class="col-md-5">
 				<div class="row">
 					<div class="col">
-						<h5 class="text text-primary">Sort laptop</h5>
+						<h5 class="text text-dark mt-2">Sort laptop</h5>
 					</div>
 					<div class="col">
 						<select class="form-control" onchange="window.location.href=this.value">
@@ -23,7 +23,7 @@
 			<div class="col-md-7">
 				<div class="row">
 					<div class="col">
-						<h5 class="text text-primary">Search laptop</h5>
+						<h5 class="text text-dark mt-2">Search laptop</h5>
 					</div>
 					<div class="col">
 						<div class="form-group">
@@ -45,14 +45,12 @@
 							{% endif %}
 							<div class="card card-footer">
 								<img src="{{ laptop.image }}" width="200" height="150">
-								<h3 class="text text-primary">{{ laptop.name }}</h3>
-								{% if laptop.quantity >=1 %}
+								<h3 class="text text-dark h4">{{ laptop.name }}</h3>
+								<h5 class="text text-danger">
+									Price:${{ laptop.price }}
+								</h5>
+								{% if laptop.quantity >=1 %}	
 									<h5 class="text text-primary">
-										Price:
-										{{ laptop.price }}
-										$
-									</h5>
-									<h5 class="text text-danger">
 										In-stock:
 										{{ laptop.quantity }}
 									</h5>
@@ -61,21 +59,14 @@
 										<input type="hidden" name="laptop_id" value="{{ laptop.id }}">
 										<input type="number" name="quantity" required min="1" max="{{ laptop.quantity }}">
 										<br>
-										<input class="btn btn-success mt-3" type="submit" value="Add to Cart">
+										<input class="btn btn-primary mt-3" type="submit" value="Add to Cart">
 									</form>
 									</div>
 								{% else %}
-									<h5 class="text text-primary">
-										Price:
-										{{ laptop.price }}
-										$
-									</h5>
 									<h5 class="text text-danger">
 										Out of stock
 									</h5>
-								
 								{% endif %}
-								
 							</div>
 						</div>
 					{% endfor %}
