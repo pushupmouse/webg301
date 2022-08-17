@@ -14,14 +14,13 @@ class CartController extends AbstractController
     #[Route('/cart', name: 'add_to_cart')]
     public function addToCart(Request $request)
     {
-
         $session = $request->getSession();
         $laptop_id = $request->get('laptop_id');
         $session->set('laptop_id', $laptop_id);
         $laptop = $this->getDoctrine()->getRepository(Laptop::class)->find($laptop_id);
         $session->set('laptop', $laptop);
         $quantity = $request->get('quantity');
-        $session->set('quantity', $quantity);
+        $session->set('quantity', $quantity);        
         $datetime = date('Y/m/d H:i:s');
         $session->set('datetime', $datetime);
         $price = $laptop->getPrice();
