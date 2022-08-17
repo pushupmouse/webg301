@@ -1,18 +1,4 @@
 /*----fonts----*/
-@font-face {
-    font-family: 'montserratregular';
-    src:url(../font/Montserrat-Regular.ttf) format('truetype');
-}
-@font-face {
-    font-family: 'indieflowerregular';
-    src: url(../font/IndieFlower-Regular.ttf) format('truetype');
-}
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'montserratregular';
-}
 section{
     width: 100%;
     height: 100vh;
@@ -49,7 +35,7 @@ section{
 h1{
     text-align: center;
     margin-bottom: 40px;
-    font-family: 'indieflowerregular';
+    font-family: 'Poppins', sans-serif;
 }
 .input-box{
     margin: 31px auto;
