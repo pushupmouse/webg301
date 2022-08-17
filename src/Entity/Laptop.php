@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\LaptopRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: LaptopRepository::class)]
@@ -30,6 +32,23 @@ class Laptop
 
     #[ORM\Column(type: 'string', length: 255)]
     private $image;
+
+    #[ORM\ManyToOne(targetEntity: Brand::class, inversedBy: 'laptops')]
+    private $brand;
+
+    #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'laptops')]
+    private $category;
+
+    #[ORM\ManyToOne(targetEntity: Origin::class, inversedBy: 'laptops')]
+    private $origin;
+
+    #[ORM\ManyToMany(targetEntity: Manufacturer::class, inversedBy: 'laptops')]
+    private $manufacturers;
+
+    public function __construct()
+    {
+        $this->manufacturers = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -104,6 +123,66 @@ class Laptop
     public function setImage(string $image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function getBrand(): ?Brand
+    {
+        return $this->brand;
+    }
+
+    public function setBrand(?Brand $brand): self
+    {
+        $this->brand = $brand;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    public function getOrigin(): ?Origin
+    {
+        return $this->origin;
+    }
+
+    public function setOrigin(?Origin $origin): self
+    {
+        $this->origin = $origin;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Manufacturer>
+     */
+    public function getManufacturers(): Collection
+    {
+        return $this->manufacturers;
+    }
+
+    public function addManufacturer(Manufacturer $manufacturer): self
+    {
+        if (!$this->manufacturers->contains($manufacturer)) {
+            $this->manufacturers[] = $manufacturer;
+        }
+
+        return $this;
+    }
+
+    public function removeManufacturer(Manufacturer $manufacturer): self
+    {
+        $this->manufacturers->removeElement($manufacturer);
 
         return $this;
     }
