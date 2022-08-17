@@ -20,25 +20,60 @@
 	<body>
 		{% block header %}
 			<nav>
-				<ul>
-					<li><a class="active"href="{{ path('home') }}">Home</a></li>
-					<li><a href="{{path('laptop_shop')}}">Shop</a></li>
-					<li><a href="{{path('laptop_index')}}">Laptop</a></li>
-					<li><a href="{{path('brand_index')}}">Brand</a></li>
-					<li><a href="{{path('category_index')}}">Category</a></li>
-					<li><a href="{{path('manufacturer_index')}}">Manufacturer</a></li>
-					<li><a href="{{path('origin_index')}}">Origin</a></li>
-					<li><a href="#" data-bs-toggle="modal" data-bs-target="#modelId">About</a></li>
-					<li>
-						{% if app.user != null %}
-							<a class="nav-link text-warning" href="{{ path('app_logout')}}">Logout:
-								<i>
-									<u>{{ app.user.username }}</u>
-								</i>
-							</a>
-						{% endif %}
-					</li>
-				</ul>
+				{% if is_granted('ROLE_ADMIN') %}
+					<ul>
+						<li>
+							<a href="{{path('laptop_index')}}">Laptop</a>
+						</li>
+						<li>
+							<a href="{{path('brand_index')}}">Brand</a>
+						</li>
+						<li>
+							<a href="{{path('category_index')}}">Category</a>
+						</li>
+						<li>
+							<a href="{{path('manufacturer_index')}}">Manufacturer</a>
+						</li>
+						<li>
+							<a href="{{path('origin_index')}}">Origin</a>
+						</li>
+						<li>
+							<a href="#" data-bs-toggle="modal" data-bs-target="#modelId">About</a>
+						</li>
+						<li>
+							{% if app.user != null %}
+								<a class="nav-link text-warning" href="{{ path('app_logout')}}">Logout:
+									<i>
+										<u>{{ app.user.username }}</u>
+									</i>
+								</a>
+							{% endif %}
+						</li>
+					</ul>
+				{% else %}
+					<ul>
+						<li>
+							<a href="{{ path('home') }}">Home</a>
+						</li>
+						<li>
+							<a href="{{path('laptop_shop')}}">Shop</a>
+						</li>
+						<li>
+							<a href="#" data-bs-toggle="modal" data-bs-target="#modelId">About</a>
+						</li>
+						<li>
+							{% if app.user != null %}
+								<a class="nav-link text-warning" href="{{ path('app_logout')}}">Logout:
+									<i>
+										<u>{{ app.user.username }}</u>
+									</i>
+								</a>
+							{% else %}
+								<a href="{{ path('app_login')}}">Login</a>
+							{% endif %}
+						</li>
+					</ul>
+				{% endif %}
 			</nav>
 
 			<!-- Modal -->
