@@ -22,7 +22,7 @@
                <th>Order Date</th>
             </tr>
             <tr>
-               <td></td>
+               <td>{{ app.user.username }}</td>
                <td>{{ laptop.name }}</td>
                <td>$ {{ laptop.price }}</td>
                <td>{{ app.session.get('quantity')  }}</td>

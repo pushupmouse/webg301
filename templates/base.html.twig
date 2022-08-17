@@ -28,6 +28,15 @@
 					<li><a href="{{path('manufacturer_index')}}">Manufacturer</a></li>
 					<li><a href="{{path('origin_index')}}">Origin</a></li>
 					<li><a href="#" data-bs-toggle="modal" data-bs-target="#modelId">About</a></li>
+					<li>
+						{% if app.user != null %}
+							<a class="nav-link text-warning" href="{{ path('app_logout')}}">Logout:
+								<i>
+									<u>{{ app.user.username }}</u>
+								</i>
+							</a>
+						{% endif %}
+					</li>
 				</ul>
 			</nav>
 
