@@ -9,11 +9,14 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
 
 #[Route('/laptop')]
 class LaptopController extends AbstractController
 {
+    #[IsGranted("ROLE_CUSTOMER")]
     #[Route('/shop', name: 'laptop_shop')]
     public function laptopShop()
     {
@@ -26,6 +29,7 @@ class LaptopController extends AbstractController
         );
     }
 
+    #[IsGranted("ROLE_ADMIN")]
     #[Route('/index', name: 'laptop_index')]
     public function laptopIndex()
     {
@@ -38,6 +42,7 @@ class LaptopController extends AbstractController
         );
     }
 
+    #[IsGranted("ROLE_ADMIN")]
     #[Route('/detail/{id}', name: 'laptop_detail')]
     public function laptopDetail($id)
     {
@@ -54,6 +59,7 @@ class LaptopController extends AbstractController
         );
     }
 
+    #[IsGranted("ROLE_ADMIN")]
     #[Route('/delete/{id}', name: 'laptop_delete')]
     public function laptopDelete($id, ManagerRegistry $managerRegistry)
     {
@@ -69,6 +75,7 @@ class LaptopController extends AbstractController
         return $this->redirectToRoute('laptop_index');
     }
 
+    #[IsGranted("ROLE_ADMIN")]
     #[Route('/add', name: 'laptop_add')]
     public function laptopAdd(Request $request)
     {
@@ -90,6 +97,7 @@ class LaptopController extends AbstractController
         );
     }
 
+    #[IsGranted("ROLE_ADMIN")]
     #[Route('/edit/{id}', name: 'laptop_edit')]
     public function laptopEdit($id, Request $request)
     {
@@ -124,6 +132,7 @@ class LaptopController extends AbstractController
             'laptops'=>$laptops
         ]);
     }
+    
     
     #[Route('/price/desc', name: 'sort_desc_price')]
     public function sortLaptopPriceDesc(LaptopRepository $laptopRepository){
