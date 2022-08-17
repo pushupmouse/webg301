@@ -13,8 +13,8 @@ section{
     justify-content: center;
 }
 
-/*------login box--------*/
-.login-box{
+/*------register box--------*/
+.register-box{
     width: 500px;
     background: rgba(0,0,0,0.8);
     margin: 12% auto;
@@ -27,57 +27,17 @@ h1{
     margin-bottom: 40px;
     font-family: 'Montserrat', sans-serif;
 }
-.input-box{
+.input-box-1{
     margin: 31px auto;
     width: 80%;
     border-bottom: 1px solid #fff;
     padding-top: 10px;
     padding-bottom: 5px;
 }
-.input-box input{
+.input-box-1 input{
     width: 90%;
     border: none;
     outline: none;
     background: transparent;
     color: #fff;
-}
-.fa{
-    margin-right: 10px;
-}
-.eye{
-    position: absolute;
-}
-#hide1{
-    display: none;
-}
-.login-btn{
-    margin: 40px auto 20px;
-    width: 80%;
-    display: block;
-    outline: none;
-    padding: 10px 0;
-    border: 1px solid #fff;
-    cursor: pointer;
-    background: transparent;
-    color: #fff;
-    font-size: 16px;
-}
-.login-btn:hover{
-    background: linear-gradient(to right, rgba(255, 116, 192, 0.726) 0%, rgb(247, 221, 151) 100%);
-    color: #000;
-}
-.error{
-    text-align: center;
-    color: rgb(255, 0, 0);
-    font-family: 'Montserrat', sans-serif;
-}
-/* .register-box{
-    padding-left: 222px;
-} */
-.register{
-    text-align: center;
-    font-family: 'Montserrat', sans-serif;
-    text-decoration: none;
-    color:#23D5AB;
-    padding-left: 222px;
 }
