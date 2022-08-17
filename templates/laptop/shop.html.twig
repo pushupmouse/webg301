@@ -59,7 +59,7 @@
 								<div class="mt-1">
 									<form action="{{ path('add_to_cart') }}" method="post">
 										<input type="hidden" name="laptop_id" value="{{ laptop.id }}">
-										<input type="number" name="quantity" min="1" max="{{ laptop.quantity }}">
+										<input type="number" name="quantity" required min="1" max="{{ laptop.quantity }}">
 										<br>
 										<input class="btn btn-success mt-3" type="submit" value="Add to Cart">
 									</form>
