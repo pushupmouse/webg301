@@ -11,9 +11,12 @@ class LaptopFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {      
-        for ($i=0; $i < 20; $i++) { 
+        $title = ["RedDragon", "Steel", "CarbonFiber", "Pro Gaming", "Hellfire"];
+        
+        for ($i=0; $i < 20; $i++) {
+            $key = array_rand($title, 1); 
             $laptop = new Laptop;
-            $laptop->setName("Laptop $i");
+            $laptop->setName("Laptop ". $title[$key] . " " .rand(1000, 2000));
             $laptop->setDate(DateTime::createFromFormat('Y/m/d','2022/01/13'));
             $laptop->setPrice((float)(rand(300,2000)));
             $laptop->setQuantity(rand(10,100));

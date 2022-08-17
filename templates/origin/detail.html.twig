@@ -11,9 +11,20 @@
       <div class="col-6">
          <table class="table table-bordered">
             <tr>
-               <th colspan="2" class="bg-light">
-                  <h2 class="text-primary">{{ origin.name }} </h2>
+               <th colspan="4" class="bg-light">
+                  <h2 class="text-primary">{{ origin.name }}</h2>
                </th>
+            </tr>
+            <tr class="h5">
+               <th>Laptop(s)</th>
+               <th>
+               {% for laptop in origin.laptops %}
+                    <a class="text-decoration-none" href="{{ path('laptop_detail', {'id' : laptop.id })}}">
+                     {{ laptop.name }} 
+                    </a>
+                     <br>
+               {% endfor %}
+               <th>
             </tr>
          </table>
       </div>

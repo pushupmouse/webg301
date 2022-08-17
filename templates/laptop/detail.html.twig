@@ -60,18 +60,11 @@
             <tr class="h5">
                <th>Manufacturer</th>
                <td>
-               {# {% if laptop.manufacturers != null %}
-                  {% for manufacturer in manufacturers %}
-                     <a class="text-decoration-none" href="{{ path('manufacturer_detail', {'id' : manufacturer.id })}}">
-                     {{ manufacturer.name }}
-                  </a> 
-                  {% endfor %}
-               {% else %} #}
                {% if laptop.manufacturers == null %}
                   <i>Not Available</i>
                {% else %}
                   {% for manufacturer in laptop.manufacturers %}
-                    <a class="text-decoration-none" href="{{ path('author_detail', {'id' : manufacturer.id })}}">
+                    <a class="text-decoration-none" href="{{ path('manufacturer_detail', {'id' : manufacturer.id })}}">
                      {{ manufacturer.name }} 
                     </a>
                      <br>
