@@ -1,5 +1,5 @@
 .row-1{
-    display: inline-block;
+    display: flex;
     align-items: center;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -17,7 +17,7 @@
     border-radius: 20%;
 }
 .col-2 h1{
-    font-size: 40px;
+    font-size: 50px;
     line-height: 60px;
     margin: 25px 0;
 }
@@ -32,4 +32,10 @@
 .btn-1:hover{
     background: linear-gradient(to right, rgb(255, 160, 216) 0%, rgb(149, 255, 181) 100%);
     color: #000;
+}
+.container-1{
+    /* max-width: 2000px;
+    margin: 0 0;
+    padding-left: 25px;
+    padding-right: 25px; */
 }
