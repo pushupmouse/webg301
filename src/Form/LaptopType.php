@@ -2,9 +2,14 @@
 
 namespace App\Form;
 
+use App\Entity\Brand;
 use App\Entity\Laptop;
+use App\Entity\Origin;
+use App\Entity\Category;
+use App\Entity\Manufacturer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -58,6 +63,42 @@ class LaptopType extends AbstractType
                 'attr' => [
                     'maxlength' => 255
                 ]
+            ])
+            ->add('manufacturers', EntityType::class,
+            [
+                'label' => 'Manufacturer',
+                'required' => true,
+                'class' => Manufacturer::class,
+                'choice_label' => 'name',
+                'multiple' => true,
+                'expanded' => false
+            ]) 
+            ->add('category', EntityType::class,
+            [
+                'label' => 'Category',
+                'required' => true,
+                'class' => Category::class,
+                'choice_label' => 'name',
+                'multiple' => false, 
+                'expanded' => false
+            ])
+            ->add('brand', EntityType::class,
+            [
+                'label' => 'Brand',
+                'required' => true,
+                'class' => Brand::class,
+                'choice_label' => 'name',
+                'multiple' => false, 
+                'expanded' => false
+            ])
+            ->add('origin', EntityType::class,
+            [
+                'label' => 'Origin',
+                'required' => true,
+                'class' => Origin::class,
+                'choice_label' => 'name',
+                'multiple' => false, 
+                'expanded' => false
             ])
         ;
     }

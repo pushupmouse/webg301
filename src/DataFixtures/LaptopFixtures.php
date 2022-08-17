@@ -10,7 +10,7 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 class LaptopFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
-    {
+    {      
         for ($i=0; $i < 20; $i++) { 
             $laptop = new Laptop;
             $laptop->setName("Laptop $i");

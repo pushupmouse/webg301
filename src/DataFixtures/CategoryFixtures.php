@@ -10,13 +10,11 @@ class CategoryFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        //$ct = ["Notebook", "Ultraportable", "Ultrabook", "Chromebook", "MacBook", "Convertible", "Tablet", "Netbook"];
-        
-        for ($i=1; $i<=20; $i++) {
-            //$keyct = array_rand($ct,1)
-            $category = new Category();
-            //$brand->setCt($ct[$keyct]);
-            $category->setName("Category $i");
+        $ct = ["Notebook", "Ultraportable", "Ultrabook", "Chromebook", "MacBook", "Convertible", "Tablet", "Netbook"];
+        $length = count($ct);
+        for ($i=0; $i<$length; $i++) {
+            $category = new Category;
+            $category->setName($ct[$i]);
             $manager->persist($category);
         }
 
