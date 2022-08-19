@@ -31,9 +31,10 @@ class LaptopController extends AbstractController
 
     #[IsGranted("ROLE_ADMIN")]
     #[Route('/index', name: 'laptop_index')]
-    public function laptopIndex()
+    public function laptopIndex(LaptopRepository $laptopRepository)
     {
-        $laptops = $this->getDoctrine()->getRepository(Laptop::class)->findAll();
+        // $laptops = $this->getDoctrine()->getRepository(Laptop::class)->findAll();
+        $laptops = $laptopRepository->sortLaptopByIdDesc();
         return $this->render(
             'laptop/index.html.twig',
             [
