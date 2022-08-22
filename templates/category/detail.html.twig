@@ -21,6 +21,16 @@
                {% endfor %}
                <th>
             </tr>
+             <tr class="h5">
+               <th>Number of Laptops:</th>
+               <th>
+               {% set i = 0 %}
+               {% for laptop in category.laptops %}
+                   {% set i = i + 1 %}  
+               {% endfor %}
+               {{ i }}
+               <th>
+            </tr>
          </table>
       </div>
    </div>

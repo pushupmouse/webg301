@@ -47,6 +47,24 @@ class CategoryRepository extends ServiceEntityRepository
         }
     }
 
+    // public function sortCategoryByIdAsc()
+    // {
+    //     return $this->createQueryBuilder('category')
+    //         ->orderBy('category.id', 'ASC')
+    //         ->getQuery()
+    //         ->getResult()
+    //     ;
+    // }
+
+    // public function sortCategoryByIdDesc()
+    // {
+    //     return $this->createQueryBuilder('category')
+    //         ->orderBy('category.id', 'DESC')
+    //         ->getQuery()
+    //         ->getResult()
+    //     ;
+    // }
+
     // /**
     //  * @return Category[] Returns an array of Category objects
     //  */

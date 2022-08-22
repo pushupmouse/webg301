@@ -42,7 +42,6 @@ class LaptopController extends AbstractController
         );
     }
 
-    #[IsGranted("ROLE_ADMIN")]
     #[Route('/detail/{id}', name: 'laptop_detail')]
     public function laptopDetail($id)
     {

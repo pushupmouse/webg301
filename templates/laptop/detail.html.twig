@@ -1,91 +1,109 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-<div class="container col-md-8 text-center mt-3">
-   <div class="row">
-      <div class="col-4">
-         <div class="card">
-            <img src="{{ laptop.image }}" width="300" height="200">
-         </div>
-      </div>
-      <div class="col-6">
-         <table class="table table-bordered">
-            <tr>
-               <th colspan="2" class="bg-light">
-                  <h2 class="text-primary">{{ laptop.name }} </h2>
-               </th>
-            </tr>
-            <tr class="h5">
-               <th>Published Date</th>
-               <td>{{ laptop.date | date('d/m/Y')}}</td>
-            </tr>
-            <tr class="h5">
-               <th>Laptop Price</th>
-               <td>${{ laptop.price }} </td>
-            </tr>
-            <tr class="h5">
-            {% if laptop.quantity >= 1 %}
-               <th>Laptop Quantity</th>
-               <td>{{ laptop.quantity }}</td>
-            {% else %}
-               <th>Laptop Quantity</th>
-               <td>Out of stock</td>
-            {% endif %}           
-            </tr>
-            </tr>
-            <tr class="h5">
-               <th>Brand</th>
-               <td>
-               {% if laptop.brand != null %}
-                  <a class="text-decoration-none" href="{{ path('brand_detail', {'id' : laptop.brand.id })}}">
-                     {{ laptop.brand.name }}
-                  </a>    
-               {% else %}
-                     <i>Not Available</i>
-               {% endif %}
-             </td>
-            </tr>
-            <tr class="h5">
-               <th>Category</th>
-               <td>
-               {% if laptop.category != null %}
-                  <a class="text-decoration-none" href="{{ path('category_detail', {'id' : laptop.category.id })}}">
-                     {{ laptop.category.name }}
-                  </a>    
-               {% else %}
-                     <i>Not Available</i>
-               {% endif %}
-             </td>
-            </tr>
-            <tr class="h5">
-               <th>Manufacturer</th>
-               <td>
-               {% if laptop.manufacturers == null %}
-                  <i>Not Available</i>
-               {% else %}
-                  {% for manufacturer in laptop.manufacturers %}
-                    <a class="text-decoration-none" href="{{ path('manufacturer_detail', {'id' : manufacturer.id })}}">
-                     {{ manufacturer.name }} 
-                    </a>
-                     <br>
-                  {% endfor %}
-               {% endif %}
-             </td>
-            </tr>
-            <tr class="h5">
-               <th>Origin</th>
-               <td>
-               {% if laptop.origin != null %}
-                  <a class="text-decoration-none" href="{{ path('origin_detail', {'id' : laptop.origin.id })}}">
-                     {{ laptop.origin.name }}
-                  </a>    
-               {% else %}
-                     <i>Not Available</i>
-               {% endif %}
-             </td>
-            </tr>
-         </table>
-      </div>
-   </div>
-</div>
-{% endblock %}
+	<div class="container col-md-8 text-center mt-3">
+		<div class="row">
+			<div class="col-4">
+				<div class="card">
+					<img src="{{ laptop.image }}" width="300" height="200">
+				</div>
+			</div>
+			<div class="col-6">
+				<table class="table table-bordered">
+					<tr>
+						<th colspan="2" class="bg-light">
+							<h2 class="text-primary">{{ laptop.name }}
+							</h2>
+						</th>
+					</tr>
+					<tr class="h5">
+						<th>Published Date</th>
+						<td>{{ laptop.date | date('d/m/Y')}}</td>
+					</tr>
+					<tr class="h5">
+						<th>Laptop Price</th>
+						<td>${{ laptop.price }}
+						</td>
+					</tr>
+					<tr class="h5">
+						{% if laptop.quantity >= 1 %}
+							<th>Laptop Quantity</th>
+							<td>{{ laptop.quantity }}</td>
+						{% else %}
+							<th>Laptop Quantity</th>
+							<td>Out of stock</td>
+						{% endif %}
+					</tr>
+				</tr>
+				<tr class="h5">
+					<th>Brand</th>
+					<td>
+						{% if laptop.brand != null %}
+							{% if is_granted('ROLE_ADMIN') %}
+								<a class="text-decoration-none" href="{{ path('brand_detail', {'id' : laptop.brand.id })}}">
+									{{ laptop.brand.name }}
+								</a>
+							{% else %}
+								{{ laptop.brand.name }}
+							{% endif %}
+						{% else %}
+							<i>Not Available</i>
+						{% endif %}
+					</td>
+				</tr>
+				<tr class="h5">
+					<th>Category</th>
+					<td>
+						{% if laptop.category != null %}
+							{% if is_granted('ROLE_ADMIN') %}
+								<a class="text-decoration-none" href="{{ path('category_detail', {'id' : laptop.category.id })}}">
+									{{ laptop.category.name }}
+								</a>
+							{% else %}
+								{{ laptop.category.name }}
+							{% endif %}
+						{% else %}
+							<i>Not Available</i>
+						{% endif %}
+					</td>
+				</tr>
+				<tr class="h5">
+					<th>Manufacturer</th>
+					<td>
+						{% if laptop.manufacturers == null %}
+							<i>Not Available</i>
+						{% else %}
+							{% for manufacturer in laptop.manufacturers %}
+								{% if is_granted('ROLE_ADMIN') %}
+									<a class="text-decoration-none" href="{{ path('manufacturer_detail', {'id' : manufacturer.id })}}">
+										{{ manufacturer.name }}
+									</a>
+									<br>
+								{% else %}
+									{{ manufacturer.name }}
+									<br>
+								{% endif %}
+							{% endfor %}
+						{% endif %}
+					</td>
+				</tr>
+				<tr class="h5">
+					<th>Origin</th>
+					<td>
+						{% if laptop.origin != null %}
+							{% if is_granted('ROLE_ADMIN') %}
+								<a class="text-decoration-none" href="{{ path('origin_detail', {'id' : laptop.origin.id })}}">
+									{{ laptop.origin.name }}
+								</a>
+							{% else %}
+								{{ laptop.origin.name }}
+							{% endif %}
+						{% else %}
+							<i>Not Available</i>
+						{% endif %}
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>{% endblock %}
