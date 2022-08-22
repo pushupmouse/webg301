@@ -47,6 +47,15 @@ class LaptopRepository extends ServiceEntityRepository
         }
     }
 
+    public function sortLaptopByIdDesc()
+    {
+        return $this->createQueryBuilder('laptop')
+            ->orderBy('laptop.id', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     public function sortLaptopByPriceAsc()
     {
         return $this->createQueryBuilder('laptop')
@@ -80,19 +89,15 @@ class LaptopRepository extends ServiceEntityRepository
     // /**
     //  * @return Laptop[] Returns an array of Laptop objects
     //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('l')
-            ->andWhere('l.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('l.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+    
+    // public function showTotalOfLaptops()
+    // {
+    //     return $this->createQueryBuilder('laptops')
+    //         ->getQuery()
+    //         ->getResult()
+    //     ;
+    // }
+    
 
     /*
     public function findOneBySomeField($value): ?Laptop
